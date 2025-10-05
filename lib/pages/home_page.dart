@@ -80,18 +80,34 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) {
                   if (index == 0) {
                     return MyButton(
+                      buttonTapped: () {
+                        setState(() {
+                          userQuestion = '';
+                        });
+                      },
                       color: Colors.green,
                       textColor: Colors.white,
                       buttonText: buttons[index],
                     );
                   } else if (index == 1) {
                     return MyButton(
+                      buttonTapped: () {
+                        setState(() {
+                          userQuestion = userQuestion.substring(
+                              0, userQuestion.length - 1);
+                        });
+                      },
                       color: Colors.red,
                       textColor: Colors.white,
                       buttonText: buttons[index],
                     );
                   } else {
                     return MyButton(
+                      buttonTapped: () {
+                        setState(() {
+                          userQuestion += buttons[index];
+                        });
+                      },
                       color: isOperator(buttons[index])
                           ? Colors.deepPurple
                           : Colors.deepPurple[50]!,
