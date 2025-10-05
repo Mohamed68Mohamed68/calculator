@@ -9,6 +9,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var userQuestion = '';
+  var userAnswer = '';
+
   final List<String> buttons = [
     'C',
     'DEL',
@@ -40,7 +43,32 @@ class _HomePageState extends State<HomePage> {
         children: [
           Expanded(
             flex: 1,
-            child: Container(),
+            child: Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      userQuestion,
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      userAnswer,
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
           Expanded(
             flex: 2,
@@ -50,15 +78,29 @@ class _HomePageState extends State<HomePage> {
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 4),
                 itemBuilder: (context, index) {
-                  return MyButton(
-                    color: isOperator(buttons[index])
-                        ? Colors.deepPurple
-                        : Colors.deepPurple[50]!,
-                    textColor: isOperator(buttons[index])
-                        ? Colors.white
-                        : Colors.deepPurple,
-                    buttonText: buttons[index],
-                  );
+                  if (index == 0) {
+                    return MyButton(
+                      color: Colors.green,
+                      textColor: Colors.white,
+                      buttonText: buttons[index],
+                    );
+                  } else if (index == 1) {
+                    return MyButton(
+                      color: Colors.red,
+                      textColor: Colors.white,
+                      buttonText: buttons[index],
+                    );
+                  } else {
+                    return MyButton(
+                      color: isOperator(buttons[index])
+                          ? Colors.deepPurple
+                          : Colors.deepPurple[50]!,
+                      textColor: isOperator(buttons[index])
+                          ? Colors.white
+                          : Colors.deepPurple,
+                      buttonText: buttons[index],
+                    );
+                  }
                 },
               ),
             ),
