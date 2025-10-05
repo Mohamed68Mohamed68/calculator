@@ -1,10 +1,31 @@
 import 'package:flutter/material.dart';
 
 class MyButton extends StatelessWidget {
-  const MyButton({super.key});
+  MyButton({
+    required this.color,
+    required this.textColor,
+    required this.buttonText,
+  });
+  final Color color;
+  final Color textColor;
+  final String buttonText;
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ClipRRect(
+        borderRadius: BorderRadiusGeometry.circular(20),
+        child: Container(
+          color: color,
+          child: Center(
+            child: Text(
+              buttonText,
+              style: TextStyle(color: textColor),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

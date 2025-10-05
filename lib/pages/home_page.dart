@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -12,14 +19,10 @@ class HomePage extends StatelessWidget {
           Expanded(
             flex: 1,
             child: Container(),
-
-            
           ),
           Expanded(
             flex: 2,
-            child: Container(
-              color: Colors.deepPurple,
-            ),
+            child: Container(),
           ),
         ],
       ),
