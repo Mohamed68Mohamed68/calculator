@@ -1,5 +1,6 @@
 import 'package:calculator/widgets/my_button.dart';
 import 'package:flutter/material.dart';
+import 'package:math_expressions/math_expressions.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,7 +21,7 @@ class _HomePageState extends State<HomePage> {
     '9',
     '8',
     '7',
-    '*',
+    'x',
     '6',
     '5',
     '4',
@@ -101,6 +102,19 @@ class _HomePageState extends State<HomePage> {
                       textColor: Colors.white,
                       buttonText: buttons[index],
                     );
+                  }
+                  //Equal Button
+                  else if (index == buttons.length - 1) {
+                    return MyButton(
+                      buttonTapped: () {
+                        setState(() {
+                          equalPressed();
+                        });
+                      },
+                      color: Colors.blue,
+                      textColor: Colors.white,
+                      buttonText: buttons[index],
+                    );
                   } else {
                     return MyButton(
                       buttonTapped: () {
@@ -127,9 +141,19 @@ class _HomePageState extends State<HomePage> {
   }
 
   bool isOperator(String x) {
-    if (x == '%' || x == '/' || x == '*' || x == '-' || x == '+' || x == '=') {
+    if (x == '%' || x == '/' || x == 'x' || x == '-' || x == '+' || x == '=') {
       return true;
     }
     return false;
+  }
+
+  void equalPressed() {
+    String finalQuestion = userQuestion;
+    finalQuestion = finalQuestion.replaceAll('x', '*');
+    Parser p = Parser();
+    Expression exp = p.parse(finalQuestion);
+    ContextModel cm = ContextModel();
+    double eval = exp.evaluate(EvaluationType.REAL, cm);
+    userAnswer = eval.toString();
   }
 }
